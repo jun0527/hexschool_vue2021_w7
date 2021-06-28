@@ -1,0 +1,77 @@
+.imgArea {
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+}
+.qtyArea .productQty {
+  width: 40px;
+  text-align: center;
+  font-weight: bold;
+}
+.qtyArea button,
+.qtyTableArea button,
+.deleteCartOne {
+  background: transparent;
+  border: none;
+}
+.qtyArea button:hover {
+  opacity: 0.5;
+}
+
+.qtyArea button:hover:disabled {
+  opacity: 1;
+}
+.deleteCartOne {
+  color: #dc3545;
+  border-radius: 5px;
+}
+.deleteCartOne span {
+  line-height: 32px;
+}
+.deleteCartOne:hover {
+  color: #fff;
+  background: #dc3545;
+}
+.noCartContent {
+  text-align: center;
+}
+.purchaseProgress {
+  width: 500px;
+  margin: 0 auto;
+}
+.purchaseProgress .progress {
+  height: 5px;
+  margin: auto 0;
+}
+.purchaseProgress span {
+  width: 75px;
+  padding: 5px;
+  background: white;
+}
+.purchaseProgress .secondStep {
+  width: 50%;
+}
+.containerForm {
+  width: 500px;
+  margin: 0 auto;
+}
+.orderContent {
+  border: 1px solid #bebebe;
+  border-radius: 5px;
+  padding: 10px;
+}
+.orderContent p {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.orderContent .total {
+  font-size: 24px;
+  font-weight: bold;
+}
+.signIn {
+  width: 350px;
+  margin: 20px auto;
+  padding: 20px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
