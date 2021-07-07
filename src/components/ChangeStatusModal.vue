@@ -4,11 +4,12 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-dark">
-        <h5 class="modal-title text-white">刪除確認</h5>
+        <h5 class="modal-title text-white">訂單狀態確認</h5>
         <button type="button" class="btn-close btn-close-white" @click="closeModal"></button>
       </div>
       <div class="modal-body">
-        <p>確定要將訂單狀態更改成已付款？</p>
+        <p v-if="!order.is_paid">確定要將訂單狀態更改成已付款？</p>
+        <p v-else>確定要將訂單狀態更改成未付款？</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" @click="closeModal">取消</button>

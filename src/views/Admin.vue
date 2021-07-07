@@ -11,7 +11,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <router-link class="nav-link" to="/admin/productsAdmin">商品管理</router-link>
+            <router-link class="nav-link" to="/admin/">商品管理</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/admin/orders">訂單管理</router-link>

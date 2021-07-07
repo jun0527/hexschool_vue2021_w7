@@ -103,6 +103,9 @@ export default {
       if (value >= 100) {
         return '優惠券折扣數 必須小於100';
       }
+      if (value <= 0) {
+        return '優惠券折扣數 不得小於等於0';
+      }
       return true;
     },
     isEnabled() {

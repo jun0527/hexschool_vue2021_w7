@@ -42,6 +42,7 @@ export default {
         .then((res) => {
           if (res.data.success) {
             swal('登出成功！');
+            document.cookie = 'vue2021_w7="";';
             this.closeModal();
             this.$router.push('/signIn');
           } else {

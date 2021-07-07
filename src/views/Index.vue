@@ -16,7 +16,7 @@
             <router-link class="nav-link" to="/cart">購物車</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/signIn">管理員登入</router-link>
+            <router-link class="nav-link" to="/admin">後台首頁</router-link>
           </li>
         </ul>
       </div>

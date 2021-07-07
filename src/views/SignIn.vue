@@ -45,7 +45,7 @@ export default {
             this.expired = new Date(res.data.expired);
             document.cookie = `vue2021_w7=${this.token}; expires=${this.expired}`;
             swal('登入成功！');
-            this.$router.push('/admin/productsAdmin');
+            this.$router.push('/admin/');
           } else {
             swal('登入失敗，請確認email及密碼是否正確！');
           }

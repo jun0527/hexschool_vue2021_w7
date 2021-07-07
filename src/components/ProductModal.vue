@@ -4,7 +4,8 @@
       <div class="modal-content">
         <Form v-slot={errors} @submit="postProduct(modal)" :key="clearForm">
           <div class="modal-header bg-dark text-white">
-            <h5 class="modal-title">商品建立</h5>
+            <h5 class="modal-title" v-if="modal === 'addProduct'">商品建立</h5>
+            <h5 class="modal-title" v-else>商品編輯</h5>
             <button type="button" class="btn-close btn-close-white" @click="closeModal"></button>
           </div>
           <div class="modal-body row">
@@ -32,7 +33,7 @@
                   <ErrorMessage name="商品分類" class="invalid-feedback"></ErrorMessage>
                 </div>
                 <div class="formGroup mb-3">
-                  <label for="imageUrl" class="form-label">商品圖片</label>
+                  <label for="imageUrl" class="form-label">商品主圖</label>
                   <button type="button"
                   class="btn btn-primary isUploadImageBtn"
                   @click="changeIsUploadImg"
@@ -68,7 +69,7 @@
                     <Field type="number" class="form-control"
                   :class="{'is-invalid': errors['原價']}"
                   id="origin_price" name="原價" placeholder="請輸入原價"
-                  rules="required" v-model.number="tempData.origin_price"></Field>
+                  rules="required|min_value:0" v-model.number="tempData.origin_price"></Field>
                   <ErrorMessage name="原價" class="invalid-feedback"></ErrorMessage>
                   </div>
                   <div class="formGroup">
@@ -88,6 +89,24 @@
                   <ErrorMessage name="單位" class="invalid-feedback"></ErrorMessage>
                   </div>
                 </div>
+                <div class="formGroup mb-3" v-if="tempData.imagesUrl.length !== 0">
+                  <label class="form-label">副圖網址</label>
+                  <div class="d-flex justify-content-between flex-wrap mb-3"
+                  v-for="(item, index) in tempData.imagesUrl" :key="item">
+                    <Field type="url" class="form-control imagesUrlArea"
+                    :class="{'is-invalid': errors[imagesFieldName[index]]}"
+                    :name="imagesFieldName[index]" :placeholder="imagesFieldName[index]"
+                    :rules="isImagesUrl" v-model="tempData.imagesUrl[index]"></Field>
+                    <button type="button" class="btn btn-danger"
+                    @click="deleteImage(index)">刪除</button>
+                    <ErrorMessage :name="imagesFieldName[index]"
+                    class="invalid-feedback"></ErrorMessage>
+                  </div>
+                </div>
+                <div class="formGroup mb-3">
+                  <button type="button" class="btn btn-primary" @click="addImages"
+                  :disabled="tempData.imagesUrl[tempData.imagesUrl.length-1] === ''">增加副圖</button>
+                </div>
                 <div class="formGroup mb-3" v-if="modal === 'addProduct'">
                   <input type="checkbox" id="is_enabled" name="is_enabled"
                   @change="isEnabled">
@@ -96,9 +115,14 @@
             </div>
             <div class="col-6">
               <div class="px-2">
-                <h2 class="text-center">圖片預覽</h2>
+                <h2 class="text-center">主圖預覽</h2>
                 <div class="previewPicture">
                   <img class="w-100" :src="tempData.imageUrl" alt="圖片預覽">
+                </div>
+                <h2 class="text-center">副圖預覽</h2>
+                <div class="previewPicture row">
+                  <img class="col-4" :src="item" alt="圖片預覽"
+                  v-for="item in tempData.imagesUrl" :key="item">
                 </div>
               </div>
             </div>
@@ -134,11 +158,13 @@ export default {
         price: '',
         unit: '',
         is_enabled: 0,
+        imagesUrl: [],
       },
       isUploadImg: false,
       imgFiles: '',
       clearForm: false,
       editId: '',
+      imagesFieldName: [],
     };
   },
   methods: {
@@ -159,8 +185,10 @@ export default {
       this.tempData.origin_price = '';
       this.tempData.price = '';
       this.tempData.unit = '';
+      this.tempData.imagesUrl = [];
       this.tempData.is_enabled = 0;
       this.editId = '';
+      this.imagesFieldName = [];
     },
     isUrl(value) {
       const url = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
@@ -169,6 +197,16 @@ export default {
       }
       if (!url.test(value)) {
         return '圖片網址 格式不正確';
+      }
+      return true;
+    },
+    isImagesUrl(value) {
+      const url = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
+      if (!this.tempData.imageUrl) {
+        return '副圖網址沒有內容，如不輸入網址，請先刪除欄位！';
+      }
+      if (!url.test(value)) {
+        return '副圖網址 格式不正確';
       }
       return true;
     },
@@ -212,6 +250,14 @@ export default {
       } else {
         this.tempData.is_enabled = 0;
       }
+    },
+    addImages() {
+      this.tempData.imagesUrl.push('');
+      this.imagesFieldName.push(`副圖${this.tempData.imagesUrl.length}網址`);
+    },
+    deleteImage(index) {
+      this.tempData.imagesUrl.splice(index, 1);
+      this.imagesFieldName.splice(index, 1);
     },
     postProduct(modal) {
       if (modal === 'addProduct') {

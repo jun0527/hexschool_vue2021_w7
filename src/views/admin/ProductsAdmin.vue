@@ -77,6 +77,7 @@ export default {
       this.$http.get(url)
         .then((res) => {
           if (res.data.success) {
+            console.log(res.data);
             this.products = res.data.products;
             this.paginationData = res.data.pagination;
             this.getProductsLoading = false;
@@ -87,6 +88,7 @@ export default {
         });
     },
     changeStatus(status, index) {
+      this.getProductsLoading = true;
       let tempEnabled = 0;
       if (status === 1) {
         tempEnabled = 0;
@@ -100,6 +102,7 @@ export default {
         .then((res) => {
           if (res.data.success) {
             swal(`將狀態更新為${tempEnabled === 1 ? '啟用' : '不啟用'}！`);
+            this.getProductsData();
           } else {
             swal('更新產品狀態失敗！');
           }
@@ -119,6 +122,12 @@ export default {
         this.$refs.productModal.tempData.unit = this.products[index].unit;
         this.$refs.productModal.tempData.is_enabled = this.products[index].is_enabled;
         this.$refs.productModal.editId = this.products[index].id;
+        if (this.products[index].imagesUrl !== undefined) {
+          this.products[index].imagesUrl.forEach((item, key) => {
+            this.$refs.productModal.tempData.imagesUrl.push(item);
+            this.$refs.productModal.imagesFieldName.push(`副圖${key + 1}網址`);
+          });
+        }
       }
       this.$refs.productModal.modal = modal;
       this.$refs.productModal.openModal();

@@ -13,7 +13,7 @@
         @click="changePage(page)">{{page}}</button>
       </li>
       <li class="page-item" :class="{'disabled': !paginationData.has_next}">
-        <button type="button" class="page-link" href="#" aria-label="Next"
+        <button type="button" class="page-link" aria-label="Next"
         @click="changePage('next')">
           <span aria-hidden="true">&raquo;</span>
         </button>
