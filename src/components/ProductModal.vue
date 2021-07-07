@@ -92,7 +92,7 @@
                 <div class="formGroup mb-3" v-if="tempData.imagesUrl.length !== 0">
                   <label class="form-label">副圖網址</label>
                   <div class="d-flex justify-content-between flex-wrap mb-3"
-                  v-for="(item, index) in tempData.imagesUrl" :key="item">
+                  v-for="(item, index) in tempData.imagesUrl" :key="index">
                     <Field type="url" class="form-control imagesUrlArea"
                     :class="{'is-invalid': errors[imagesFieldName[index]]}"
                     :name="imagesFieldName[index]" :placeholder="imagesFieldName[index]"
@@ -202,7 +202,7 @@ export default {
     },
     isImagesUrl(value) {
       const url = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
-      if (!this.tempData.imageUrl) {
+      if (value === '') {
         return '副圖網址沒有內容，如不輸入網址，請先刪除欄位！';
       }
       if (!url.test(value)) {
@@ -257,7 +257,7 @@ export default {
     },
     deleteImage(index) {
       this.tempData.imagesUrl.splice(index, 1);
-      this.imagesFieldName.splice(index, 1);
+      this.imagesFieldName.pop();
     },
     postProduct(modal) {
       if (modal === 'addProduct') {
