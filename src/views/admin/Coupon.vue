@@ -100,6 +100,7 @@ export default {
       }
     },
     changeStatus(status, item) {
+      this.getCouponLoading = true;
       const obj = {};
       obj.data = { ...item };
       if (status) {

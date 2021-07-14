@@ -20,7 +20,7 @@
               <label for="percent" class="form-label">優惠券折扣數</label>
               <Field type="number" class="form-control"
               :class="{'is-invalid': errors['優惠券折扣數']}" id="percent" name="優惠券折扣數"
-              placeholder="請輸入優惠券折扣數(單位為%)" :rules="percentRule"
+              placeholder="請輸入優惠券折扣數(單位為%)" :rules="percentRule" min="0"
               v-model.number="tempData.percent"></Field>
               <ErrorMessage name="優惠券折扣數" class="invalid-feedback"></ErrorMessage>
             </div>

@@ -68,7 +68,7 @@
                     <label for="origin_price" class="form-label">原價</label>
                     <Field type="number" class="form-control"
                   :class="{'is-invalid': errors['原價']}"
-                  id="origin_price" name="原價" placeholder="請輸入原價"
+                  id="origin_price" name="原價" placeholder="請輸入原價" min="0"
                   rules="required|min_value:0" v-model.number="tempData.origin_price"></Field>
                   <ErrorMessage name="原價" class="invalid-feedback"></ErrorMessage>
                   </div>
