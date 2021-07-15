@@ -4,7 +4,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-dark">
-        <h5 class="modal-title text-white">刪除確認</h5>
+        <h5 class="modal-title text-white">登出確認</h5>
         <button type="button" class="btn-close btn-close-white" @click="closeModal"></button>
       </div>
       <div class="modal-body">

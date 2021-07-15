@@ -76,7 +76,7 @@
                     <label for="price" class="form-label">售價</label>
                     <Field type="number" class="form-control"
                   :class="{'is-invalid': errors['售價']}" id="price" name="售價"
-                  placeholder="請輸入售價" :rules="priceRule"
+                  placeholder="請輸入售價" :rules="priceRule" min="0"
                   v-model.number="tempData.price"></Field>
                   <ErrorMessage name="售價" class="invalid-feedback"></ErrorMessage>
                   </div>
